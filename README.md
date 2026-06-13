@@ -1,87 +1,46 @@
-![HyperADRules](https://raw.githubusercontent.com/Lynricsy/HyperADRules/refs/heads/master/pics/logo.png)
-<div align="center">
-<h1 align="center">HyperADRules<br>一个集合众家之长的、强力去广告的规则</h1>
-<p>
-  <a href="https://github.com/Lynricsy/HyperADRules">
-    <img src="https://img.shields.io/github/last-commit/Lynricsy/HyperADRules?style=flat" alt="last update" />
-  </a>
-  <a href="https://github.com/Lynricsy/HyperADRules">
-    <img src="https://img.shields.io/github/forks/Lynricsy/HyperADRules?style=flat" alt="forks" />
-  </a>
-  <a href="https://github.com/Lynricsy/HyperADRules">
-    <img src="https://img.shields.io/github/stars/Lynricsy/HyperADRules?style=flat" alt="stars" />
-  </a>
-  <a href="https://github.com/Lynricsy/HyperADRules/issues/">
-    <img src="https://img.shields.io/github/issues/Lynricsy/HyperADRules?style=flat" alt="open issues" />
-  </a>
-  <a href="https://github.com/Lynricsy/HyperADRules">
-    <img src="https://img.shields.io/github/license/Lynricsy/HyperADRules?style=flat" alt="license" />
-  </a>
-</p>
+# HyperADRules — Clash/Mihomo 转换版
 
-<h4>
-    <a href="#a">Status</a>
-  <span> · </span>
-    <a href="#b">上游列表</a>
-  <span> · </span>
-    <a href="#c">拦截效果</a>
-  <span> · </span>
-    <a href="#d">完善项目</a>
-  </h4>
+Fork from [Lynricsy/HyperADRules](https://github.com/Lynricsy/HyperADRules)，自动将 Adblock Plus 格式规则转换为 Clash/Mihomo 兼容的域名列表。
 
-</div>
+## 生成的文件
 
-<h2 id="a">Status</h2>
+| 文件 | 来源 | 说明 |
+|------|------|------|
+| `clash-domains.txt` | `rules.txt` (405k 规则) | 主拦截规则，域名最多 |
+| `clash-dns-domains.txt` | `dns.txt` (228k 规则) | DNS 级别拦截 |
+| `clash-combined.txt` | 合并去重 | 以上两者合并去重，推荐使用 |
 
-```
-更新时间: 2026-06-13 10:02:58 （北京时间） 
+## 使用方式
 
-拦截规则数量: 405401 
-DNS拦截规则数量: 228594 
-白名单规则数量: 9038 
+### Mihomo / Clash Meta / OpenClash
+
+```yaml
+rule-providers:
+  antiad:
+    type: http
+    behavior: domain
+    format: text
+    url: "https://raw.githubusercontent.com/<你的用户名>/HyperADRules/master/clash-combined.txt"
+    path: ./rule_provider/antiad.txt
+    interval: 86400
 ```
 
-**快速复制规则：**
-<ul>
+或在 OpenClash 覆盖脚本中使用：
 
-- **[拦截规则（Github）](https://raw.githubusercontent.com/Lynricsy/HyperADRules/master/rules.txt)**
-- **[拦截规则(Ghproxy-国内加速)](https://ghfast.top/raw.githubusercontent.com/Lynricsy/HyperADRules/master/rules.txt)**
-- **[DNS拦截规则（Github）](https://raw.githubusercontent.com/Lynricsy/HyperADRules/master/dns.txt)**
-- **[DNS拦截规则(Ghproxy-国内加速)](https://ghfast.top/raw.githubusercontent.com/Lynricsy/HyperADRules/master/dns.txt)**
-- **[白名单（Github）](https://raw.githubusercontent.com/Lynricsy/HyperADRules/master/allow.txt)**
-- **[白名单(Ghproxy-国内加速)](https://ghfast.top/raw.githubusercontent.com/Lynricsy/HyperADRules/master/allow.txt)**
+```bash
+ruby_merge_hash "$CONFIG_FILE" "['rule-providers']" \
+  "'antiad'=>{'type'=>'http', 'behavior'=>'domain', 'url'=>'https://raw.githubusercontent.com/<你的用户名>/HyperADRules/master/clash-combined.txt', 'path'=>'./rule_provider/antiad.txt', 'interval'=>86400, 'format'=>'text'}"
+```
 
-</ul>
+> 💡 国内网络可将 `raw.githubusercontent.com` 替换为 `raw.gitmirror.com` 或 `ghproxy.net` 镜像。
 
-<h2 id="b">上游列表</h2>
+### 在规则中使用
 
-- [AdGuard规则](https://github.com/AdguardTeam/AdguardFilters)
-- [Tv规则](https://perflyst.github.io/PiHoleBlocklist/SmartTV-AGH.txt)
-- [yhosts规则](https://raw.githubusercontent.com/VeleSila/yhosts/master/hosts)
-- [大圣净化规则](https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts)
-- [EasyPrivacy隐私保护规则](https://easylist-downloads.adblockplus.org/easyprivacy.txt)
-- [乘风视频过滤规则](https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt)
-- [去APP下载提示规则](https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt)
-- [d3ward规则](https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock)
-- [oisd规则](https://small.oisd.nl/)
-- [秋风规则](https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt)
-- [GOODBYEADS](https://github.com/8680/GOODBYEADS)
-- [antiAD](https://github.com/privacy-protection-tools/anti-AD)
-- [adblockfilters](https://github.com/217heidai/adblockfilters)
-- 我自己补充的规则
+```yaml
+rules:
+  - RULE-SET,antiad,REJECT
+```
 
-<h2 id="c">测试拦截效果</h2>
+## 自动更新
 
-[Ad Blocker Test](https://d3ward.github.io/toolz/adblock.html)
-
-<h2 id="d">协助我完善此项目</h2>
-
-希望大家可以提交 Issue 或者 Request 来帮助我完善规则 我审核之后会加入到规则，如果规则有误杀我会尽快处理
-
-**本项目部分源码来自[GOODBYEADS](https://github.com/8680/GOODBYEADS)，在此表示感谢。**
-
-**提交范围**
-
-- 漏拦截的广告
-- 误杀的网站
-- 请在测试出具体的域名之后提交issue
+GitHub Actions 每天 UTC 02:00 自动运行转换。你也可以在 Actions 页面手动触发。
