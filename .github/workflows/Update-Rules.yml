@@ -1,20 +1,23 @@
 name: Update Rules
-on: 
+on:
   workflow_dispatch:
   schedule:
     - cron: '0 */12 * * *'
-    
+
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-          
+
       - name: Update Rules
         continue-on-error: true
         run: |
           bash ./data/script/update-rules.sh
-          
+
       - name: Update ReadMe
         run: |
           bash ./data/script/clean-readme.sh
@@ -29,7 +32,7 @@ jobs:
           git commit -m "Updated at $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')（北京时间）"
           git push -u origin -f
 
-      - name: Delete workflow runs 
+      - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@main
         with:
           token: ${{ secrets.TOKENS }}
