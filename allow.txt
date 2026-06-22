@@ -2,9 +2,9 @@
 ! Title: HyperADRules
 ! Homepage: https://github.com/Lynricsy/HyperADRules
 ! Expires: 12 Hours
-! Version: 2026-06-22 12:17:47（北京时间）
+! Version: 2026-06-23 00:59:04（北京时间）
 ! Description: HyperADRules，一个集合众家之长的、强力去广告的规则
-! Total count: 9135
+! Total count: 9142
 @@$cookie=__gads,domain=godstoryinfo.com|laweducationinfo.com|rsgames.xyz|vichitrainfo.com
 @@$generichide,domain=androidpolice.com|babygaga.com|backyardboss.net|carbuzz.com|cbr.com|collider.com|dualshockers.com|footballfancast.com|footballleagueworld.co.uk|gamerant.com|givemesport.com|hardcoregamer.com|hotcars.com|howtogeek.com|makeuseof.com|moms.com|movieweb.com|pocket-lint.com|pocketnow.com|screenrant.com|simpleflying.com|thegamer.com|therichest.com|thesportster.com|thethings.com|thetravel.com|topspeed.com|xda-developers.com
 @@$image,stealth=referrer,domain=comix.to
@@ -559,6 +559,8 @@
 @@||a0.app.xiaomi.com^$important
 @@||a1.itc.cn/pv/js/spv.
 @@||a10.com/wdg/js_aggregator-active/js/module/monetisation/advertisement.js
+@@||a2zapk.dev/images/$image,domain=a2zupload.com
+@@||a2zapk.dev^$script,xmlhttprequest,third-party,domain=financemonk.net|rtxkeeda.com|houseofblogger.com|dropgalaxy.com|djxmaza.in
 @@||a8cv.amiami.jp/click/$removeparam=a8
 @@||aax-eu.amazon-adsystem.com/s/yoc^$domain=youronlinechoices.com
 @@||aax.amazon-adsystem.com^$domain=mylifetime.com
@@ -580,6 +582,7 @@
 @@||ac.namu.la^$domain=arca.live,media,image,stealth=referrer
 @@||ac.namu.la^$image,domain=arca.live,stealth=referrer
 @@||accaii.com^$domain=kyuusai2nd.net
+@@||access.worldpay.com^$stealth=referrer
 @@||account.adobe.com/newrelic.js$~third-party
 @@||account.mail.ru^$stealth=useragent
 @@||account.mcid.mynavi.jp^$stealth=referrer
@@ -5508,6 +5511,7 @@
 @@||ks-bueromoebel.shop/*/google-analytics.*.js
 @@||ksapisrv.com/rest/wd/common/log/collect/
 @@||ksdpictures.site/embed/$subdocument,stealth=referrer
+@@||ksdpictures.site^$subdocument,stealth=referrer
 @@||ksv-video-publish-m3u8.cdn.bcebos.com/*.m3u8$stealth=referrer
 @@||ku.dk^
 @@||kultursanat.istanbul^$stealth=dpi
@@ -6646,6 +6650,7 @@
 @@||pics.porn300.com^
 @@||pics.porndroids.com^
 @@||picsearch.com/js/comscore.js$domain=dn.se
+@@||pictures.spordunyasi.site^$stealth=referrer
 @@||pillsbury.com/Shared/StarterKit/Javascript/UnicaTag.js
 @@||pillsbury.com/Shared/StarterKit/Javascript/ntpagetag.js
 @@||pinduoduo.com/advert/$~third-party
@@ -8162,6 +8167,7 @@
 @@||teraearn.com^$generichide
 @@||teralink.me^$generichide
 @@||terminvereinbarung.leipzig.de^$stealth=dpi
+@@||tesco.com/akam/13/$domain=tesco.com
 @@||testufo.com^$generichide
 @@||texasroadhouse.com/common/javascript/google-analytics.js
 @@||textfree.us^$generichide
@@ -8644,6 +8650,7 @@
 @@||vidible.tv^*/ComScore.StreamSense.js
 @@||vidible.tv^*/ComScore.Viewability.js
 @@||vidmoly.to/embed-$stealth=referrer|ip
+@@||vidnest-*.workers.dev/mp4-proxy$stealth=referrer
 @@||vidnest.io^$generichide
 @@||vidoza.net/embed-*.html$subdocument
 @@||vidoza.net/js/pop.js
